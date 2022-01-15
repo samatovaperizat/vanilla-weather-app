@@ -17,7 +17,34 @@ function formatDate(timestamp){
     return `${day} ${hours}:${minutes}`;
 
 }
+function displayForecast(){
+    let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+   let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+   days.forEach(function(day){
+    forecastHTML = forecastHTML + `
+       <div class="col-2">
+           <div class="weather-forecast-date">
+           ${day}
+        </div>
+        <div class="icon">
+           <img src="http://openweathermap.org/img/wn/50d@2x.png"
+            alt=""
+        width="36"/> </div>
+        <div class="weather-forecast-temperature">
+            <span class="weather-forecast-temperature-max">
+        18°
+    </span> <span class="weather-forecast-temperature-min">12°</span>
+    </div>
+    </div>
+     `;
+   })
+      
+     forecastHTML = forecastHTML + `</div>`;
+    forecastElement.innerHTML = forecastHTML;
 
+    
+}
 function displayTemperature(response){
     let temperatureElement=document.querySelector("#temperature");
     let cityElement=document.querySelector("#city");
@@ -26,6 +53,8 @@ function displayTemperature(response){
     let windElement=document.querySelector("#humidity");
     let dateElement=document.querySelector("#date");
     let iconElement=document.querySelector("#icon");
+
+    
 
     celsiusTemperature = response.data.main.temp;
 
@@ -75,6 +104,8 @@ let celsiusTemperature = null;
 
 
 
+
+
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit)
 
@@ -86,3 +117,4 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 search("Göttingen");
+displayForecast();
